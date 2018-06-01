@@ -1,10 +1,5 @@
 """
 Use bitwise operator to add/subtract/multiply/divide two numbers
-
-Input:
-3 2
-Output:
-5
 """
 
 def add_bitwise_operator(x, y):
@@ -48,6 +43,30 @@ def subtract_bitwise_operator(x, y):
         x = x ^ y # use XOR to subtract the bits without producing a borrow bit
         y = borrow << 1 # carry the borrow bits one column left
     return x
+
+def multiply_bitwise_operator(x, y):
+    ''' x * y using bitwise operator
+        note: using 'add' operator is unavoidable (?)
+              could use add_bitwise_operator or arithmetic '+'
+        reference: 'russian peasant method'.
+                    Let the two given numbers be 'x' and 'y'
+                    1) Initialize result 'res' as 0.
+                    2) Do following while 'y' is greater than 0
+                        a) If 'y' is odd, add 'x' to 'res'
+                        b) Double 'x' and halve 'y'
+                    3) Return 'res'. 
+    '''
+    while y:
+        # if second number is odd, add the first number to result.
+        if (y & 1): 
+            res = res + x # '+' could be replace by 'add_bitwise_operator'
+        # double the first number and halve the second number
+        x = x << 1
+        y = y >> 1
+    return res
+
+
+
 
 
     
