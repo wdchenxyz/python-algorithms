@@ -12,4 +12,11 @@ def remove_bit(num, i):
     mask = num >> (i + 1)
     mask = mask << i                 
     miss_part = ((1 << i) - 1) & num # find the missing part in original num
-    return num | miss_part
+    return mask | miss_part
+
+num = 21
+print(
+    remove_bit(num, 2),
+    remove_bit(num, 4),
+    remove_bit(num, 0)
+)
