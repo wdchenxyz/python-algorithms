@@ -56,6 +56,7 @@ def multiply_bitwise_operator(x, y):
                         b) Double 'x' and halve 'y'
                     3) Return 'res'. 
     '''
+    res = 0
     while y:
         # if second number is odd, add the first number to result.
         if (y & 1): 
@@ -65,8 +66,24 @@ def multiply_bitwise_operator(x, y):
         y = y >> 1
     return res
 
+def divide_bitwise_operator(x, y):
+    ''' x / y using bitwise operator
+        Idea: keep subtracting the divisor from dividend until dividend becomes less than divisor.
+            The dividend becomes the remainder, and the number of times subtraction is done becomes the quotient.
+    '''
 
+    # sign of the quotient
+    # sign = -1 either one of them is negative
+    # otherwise sign = 1
+    sign = -1 if ((x < 0) ^ (y < 0)) else 1 
 
+    # make both divisor and dividend be positive
+    x = abs(x)
+    y = abs(y)
 
-
+    quotient = 0
+    while (x >= y):
+        x -= y
+        quotient += 1
     
+    return sign * quotient
