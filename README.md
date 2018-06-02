@@ -1,2 +1,2 @@
 # python-algorithms
-repo for algorithms writting in python
+repo for algorithms written in python
