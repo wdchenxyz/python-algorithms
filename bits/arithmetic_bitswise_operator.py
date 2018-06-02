@@ -1,5 +1,6 @@
 """
 Use bitwise operator to add/subtract/multiply/divide two numbers
+Recommend using C/C++, Python doesn't optimize tail recursion,
 """
 
 def add_bitwise_operator(x, y):
@@ -40,8 +41,8 @@ def subtract_bitwise_operator(x, y):
     '''
     while y: 
         borrow = (~x) & y # find which bits will result in borrow bit
-        x = x ^ y # use XOR to subtract the bits without producing a borrow bit
-        y = borrow << 1 # carry the borrow bits one column left
+        x = x ^ y         # use XOR to subtract the bits without producing a borrow bit
+        y = borrow << 1   # carry the borrow bits one column left
     return x
 
 def multiply_bitwise_operator(x, y):
@@ -87,3 +88,45 @@ def divide_bitwise_operator(x, y):
         quotient += 1
     
     return sign * quotient
+
+"""
+Recursion version or other method
+"""
+
+def recursion_add(x, y):
+    if (y == 0):
+        return x
+    else:
+        return recursion_add(x ^ y, (x & y) << 1)
+
+def recursion_subtract(x, y):
+    if (y == 0):
+        return x
+    else: 
+        return recursion_subtract(x ^ y, (~x & y) << 1)
+
+def recursion_multiply(x, y):
+
+    # 0 multiplied with anything gives 0
+    if (y == 0):
+        return 0
+    # add x one by one, y times
+    if (y > 0):
+        return x + recursion_multiply(x, y - 1)
+    # do oppositely
+    if (y < 0):
+        return -recursion_multiply(x, -y)
+
+def recursion_divide(dividend, divisor):
+    
+    def quotient(x, y):
+        if x < y:
+            return 0
+        return 1 + quotient(x - y, y)
+
+    sign = -1 if ((dividend < 0) ^ (divisor < 0)) else 1 
+    dividend = abs(dividend)
+    divisor = abs(divisor)
+
+    return sign * quotient(dividend, divisor)
+
