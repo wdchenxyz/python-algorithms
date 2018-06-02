@@ -8,7 +8,8 @@ remove_bit(num, 0): output = 1010 (10)
 """
 
 def remove_bit(num, i):
+    # prune the bits after ith bits
     mask = num >> (i + 1)
-    mask = mask << i
-    miss_part = ((1 << i) - 1) & num
+    mask = mask << i                 
+    miss_part = ((1 << i) - 1) & num # find the missing part in original num
     return num | miss_part
