@@ -30,5 +30,9 @@ def search_range(nums, target):
     return [-1, 1]
 
 nums =  [5,7,7,8,8,8,10]
+target = 8
+print(search_range(nums, target))
+target = 11
+print(search_range(nums, target))
 target = 7
 print(search_range(nums, target))
